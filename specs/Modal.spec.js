@@ -3,6 +3,7 @@ import "should";
 import should from "should";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import { renderToStaticMarkup } from "react-dom/server";
 import Modal from "react-modal";
 import * as ariaAppHider from "react-modal/helpers/ariaAppHider";
 import {
@@ -512,5 +513,10 @@ export default () => {
 
     Modal.setAppElement(node);
     ReactDOM.render(<App />, node);
+  });
+  it("can be rendred staticly", () => {
+    // eslint-disable-next-line react/no-render-return-value
+    const markup = renderToStaticMarkup(<Modal />);
+    should(markup).be.ok();
   });
 };
